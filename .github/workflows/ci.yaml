@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  smart-runner-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -76,6 +76,8 @@ jobs:
             echo "Success: Test passed for $file_path."
             echo "--------------------------"
           }
+
+          chmod +x examples/*.sh
 
           # Tests for the example files
           run_test "examples/HelloWorld.py" "Hello from Python!"

@@ -31,32 +31,36 @@ function M.run()
   local ext = vim.fn.expand("%:e") -- identify file extension
   local pom_path = vim.fn.findfile('pom.xml', '.;') -- find a pom file for maven projects
 
+  local command_to_run
+
   -- for maven projects
   if pom_path ~= '' and pom_path ~= nil and ext == 'java' then
     vim.notify("Maven project detected! Running the application...", vim.log.levels.INFO)
-    vim.cmd("split")
-    vim.cmd("terminal mvn compile exec:java")
-    return
-  end
-
-  -- for other files
-  local file_dir = vim.fn.expand("%:h")
-  local file_name = vim.fn.expand("%:t")
-  local file_no_ext = vim.fn.expand("%:t:r")
-
-  local config = vim.tbl_deep_extend("force", M.defaults, {})
-  local template = config.commands[ext]
-
-  if template then
-    local command = template:gsub("%%f", file_name):gsub("%%c", file_no_ext):gsub("%%e", file_no_ext)
-    local final_command = "cd '" .. file_dir .. "' && " .. command
-
-    vim.notify("Running command for: " .. ext, vim.log.levels.INFO)
-    vim.cmd("split")
-    vim.cmd("terminal " .. final_command)
+    command_to_run = "mvn compile exec:java"
   else
-    vim.notify("No action defined for extension: " .. ext, vim.log.levels.ERROR)
+    -- for other files
+    local file_dir = vim.fn.expand("%:h")
+    local file_name = vim.fn.expand("%:t")
+    local file_no_ext = vim.fn.expand("%:t:r")
+
+    local config = vim.tbl_deep_extend("force", M.defaults, {})
+    local template = config.commands[ext]
+
+    if template then
+      local command = template:gsub("%%f", file_name):gsub("%%c", file_no_ext):gsub("%%e", file_no_ext)
+      command_to_run = "cd '" .. file_dir .. "' && " .. command
+    else
+      vim.notify("No action defined for extension: " .. ext, vim.log.levels.ERROR)
+      return
+    end
   end
+
+  if os.getenv("CI") then
+    command_to_run = command_to_run .. "; exit"
+  end
+
+  vim.cmd("vsplit")
+  vim.cmd("terminal " .. command_to_run)
 end
 
 function M.setup(opts)
