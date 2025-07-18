@@ -51,6 +51,8 @@ jobs:
           sudo ln -sf /usr/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
       # 4. Run the tests!
       - name: Run tests
+        env:
+          SMART_RUNNER_CI: true
         run: |
           # Function to run a test and check the output
           run_test() {
