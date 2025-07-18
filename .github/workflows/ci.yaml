@@ -43,12 +43,11 @@ jobs:
       # 3. Install Neovim
       - name: Install Neovim
         run: |
-          curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+          curl -LO -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
           chmod u+x nvim.appimage
           ./nvim.appimage --appimage-extract
           sudo mv squashfs-root /usr
           sudo ln -s /usr/bin/nvim /usr/local/bin/nvim
-
       # 4. Run the tests!
       - name: Run tests
         run: |
@@ -89,6 +88,6 @@ jobs:
           run_test "examples/HelloWorld.rs" "Hello from Rust!"
           
           # Tests for the sample projects
-          run_test "test-projects/maven-hello-world/src/main/java/com/example/App.java" "Hello from Maven!"
+          run_test "examples/projects/maven-hello-world/src/main/java/com/example/App.java" "Hello from Maven!"
 
           echo "All tests passed successfully!"
