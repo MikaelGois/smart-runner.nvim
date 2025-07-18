@@ -18,11 +18,11 @@ M.defaults = {
     lua = "lua %f",
 
     -- compiled
-    java = "javac %f && java %c; rm %c.class",
-    c = "gcc %f -o %e && ./%e; rm %e",
-    cpp = "g++ %f -o %e && ./%e; rm %e",
+    java = "javac %f && java %c && rm %c.class",
+    c = "gcc %f -o %e && ./%e && rm %e",
+    cpp = "g++ %f -o %e && ./%e && rm %e",
     go = "go run %f",
-    rs = "rustc %f && ./%e; rm %e",
+    rs = "rustc %f && ./%e && rm %e",
   },
 }
 

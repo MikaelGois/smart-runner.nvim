@@ -43,7 +43,7 @@ jobs:
       # 3. Install Neovim
       - name: Install Neovim
         run: |
-          curl -LO -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+          curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
           chmod u+x nvim.appimage
           ./nvim.appimage --appimage-extract
           sudo mv squashfs-root /usr
