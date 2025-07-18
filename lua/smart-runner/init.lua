@@ -56,10 +56,27 @@ function M.run()
   end
 
   if os.getenv("CI") then
-    command_to_run = command_to_run .. "; exit"
+    vim.fn.jobstart(command_to_run, {
+      stdout_buffered = true,
+      on_stdout = function(_, data)
+        if data then
+          for _, line in ipairs(data) do
+            print(line)
+          end
+        end
+      end,
+      on_stderr = function(_, data)
+        if data then
+          for _, line in ipairs(data) do
+            print(line)
+          end
+        end
+      end,
+    })
+    return
   end
 
-  vim.cmd("vsplit")
+  vim.cmd("split")
   vim.cmd("terminal " .. command_to_run)
 end
 
