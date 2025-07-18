@@ -44,10 +44,11 @@ jobs:
       - name: Install Neovim
         run: |
           curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+          mv nvim-linux-x86_64.appimage nvim.appimage
           chmod u+x nvim.appimage
           ./nvim.appimage --appimage-extract
-          sudo mv squashfs-root /usr
-          sudo ln -s /usr/bin/nvim /usr/local/bin/nvim
+          sudo mv squashfs-root /usr/
+          sudo ln -sf /usr/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
       # 4. Run the tests!
       - name: Run tests
         run: |
