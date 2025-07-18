@@ -55,7 +55,7 @@ function M.run()
     end
   end
 
-  if os.getenv("CI") then
+  if os.getenv("SMART_RUNNER_CI") then
     vim.fn.jobstart(command_to_run, {
       stdout_buffered = true,
       on_stdout = function(_, data)
