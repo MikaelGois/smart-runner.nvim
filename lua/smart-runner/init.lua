@@ -56,23 +56,23 @@ function M.run()
   end
 
   if os.getenv("SMART_RUNNER_CI") then
-    vim.fn.jobstart(command_to_run, {
+    local job_id = vim.fn.jobstart(command_to_run, {
       stdout_buffered = true,
       on_stdout = function(_, data)
         if data then
-          for _, line in ipairs(data) do
-            print(line)
-          end
+          for _, line in ipairs(data) do if line ~= "" then print(line) end end
         end
       end,
       on_stderr = function(_, data)
         if data then
-          for _, line in ipairs(data) do
-            print(line)
-          end
+          for _, line in ipairs(data) do if line ~= "" then print(line) end end
         end
       end,
     })
+    
+    if job_id and job_id > 0 then
+      vim.fn.jobwait({job_id})
+    end
     return
   end
 
