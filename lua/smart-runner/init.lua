@@ -9,17 +9,17 @@ M.defaults = {
 
   -- default commands per archive type
   commands = {
-    py = "python3",
+    py = "python3 %f",
     java = "javac %f && java %c",
-    js = "node",
-    ts = "ts-node",
+    js = "node %f",
+    ts = "ts-node %f",
     c = "gcc %f -o %e && ./%e",
     cpp = "g++ %f -o %e && ./%e",
-    sh = "bash",
-    go = "go run",
+    sh = "bash %f",
+    go = "go run %f",
     rs = "rustc %f && ./%e",
-    php = "php",
-    lua = "lua",
+    php = "php %f",
+    lua = "lua %f",
   },
 }
 
