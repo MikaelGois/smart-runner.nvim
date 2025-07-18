@@ -56,6 +56,7 @@ function M.run()
     vim.cmd("terminal " .. final_command)
   else
     vim.notify("No action defined for extension: " .. ext, vim.log.levels.ERROR)
+    return
   end
 end
 
