@@ -53,7 +53,7 @@ lvim.plugins = {
 
 ## ⚙️ Configuração (Opcional)
 
-Você pode personalizar o plugin passando uma tabela `opts` quando você `setup` ou declarar o plugin.
+Você pode personalizar o plugin passando uma tabela `opts` quando você faz o `setup` ou declara o plugin.
 
 **Exemplo Completo de Configuração:**
 
