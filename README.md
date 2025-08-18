@@ -1,4 +1,11 @@
-# smart-runner.nvim
+<div align="center">
+  <h1>smart-runner.nvim</h1>
+  <p>
+    <a href="./README.md">English</a> | <a href="./README.pt.md">Português</a>
+  </p>
+</div>
+
+---
 
 A simple and intelligent code runner plugin for Neovim, designed to execute the current file with a single key press.
 
