@@ -34,7 +34,7 @@ function M.run()
   -- for maven projects
   if pom_path ~= '' and pom_path ~= nil and ext == 'java' then
     vim.notify("Maven project detected! Running the application...", vim.log.levels.INFO)
-    vim.cmd("vsplit")
+    vim.cmd("split")
     vim.cmd("terminal mvn compile exec:java")
     return
   end
@@ -52,7 +52,7 @@ function M.run()
     local final_command = "cd '" .. file_dir .. "' && " .. command
 
     vim.notify("Running command for: " .. ext, vim.log.levels.INFO)
-    vim.cmd("vsplit")
+    vim.cmd("split")
     vim.cmd("terminal " .. final_command)
   else
     vim.notify("No action defined for extension: " .. ext, vim.log.levels.ERROR)
